@@ -5,11 +5,13 @@ class PokerTest(unittest.TestCase):
     straight_flush = "6C 7C 8C 9C TC".split()
     four_kind = "9D 9H 9C 9S 7H".split()
     full_house = "TD TC TH 7C 7D".split()
+    straight_ace_low = "AS 2S 3C 4D 5H".split()
 
     def test_card_ranks(self):
         self.assertEquals(poker.card_ranks(self.straight_flush),[10,9,8,7,6])
         self.assertEquals(poker.card_ranks(self.four_kind),[9,9,9,9,7])
         self.assertEquals(poker.card_ranks(self.full_house),[10,10,10,7,7])
+        self.assertEquals(poker.card_ranks(self.straight_ace_low),[5,4,3,2,1])
     
     def test_straight(self):
         self.assertTrue(poker.straight([10,9,8,7,6]))

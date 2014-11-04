@@ -1,13 +1,17 @@
+import random
+
+mydeck = [r+s for r in '23456789TJQKA' for s in 'SHDC'] 
+
 def poker(hands):
-    "Return the best hand: poker([hand,...]) => hand"
+    "Return a list of winning hands: poker([hand,...]) => [hand,...]"
     return max(hands, key=hand_rank)
 
 def card_ranks(cards):
     "Return a list of the ranks, sorted with higher first."
-    ranks = [r for r,s in cards]
-    rankDict = {"A":14,"K":13,"Q":12,"J":11,"T":10}
-    ranks = [int(rankDict.get(r,r)) for r in ranks]
-    ranks.sort(reverse=True)
+    ranks = ['--23456789TJQKA'.index(r) for r, s in hand]
+    ranks.sort(reverse = True)
+    if ranks == [14,5,4,3,2]:
+        ranks = [5,4,3,2,1]
     return ranks
 
 def straight(ranks):
@@ -60,3 +64,15 @@ def hand_rank(hand):
         return (1,kind(2,ranks),ranks)
     else:                                          # high card
         return (0,ranks)
+
+def deal(numhands, n=5, deck=mydeck):
+    newdeck = list(deck)
+    random.shuffle(newdeck)
+    hands = []
+    for hand in range(numhands):
+        hand = []
+        for card in range(n):
+            hand.append(newdeck.pop())
+        hands.append(hand)
+    return hands
+
